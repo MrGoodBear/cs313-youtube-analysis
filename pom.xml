@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.cs313.cameron</groupId>
-	<artifactId>tubehappy-final</artifactId>
+	<artifactId>TubeHappy-final</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>tubehappy-final</name>
+	<name>TubeHappy-final</name>
 	<description>cs313 java project site</description>
 
 	<parent>
@@ -47,12 +47,12 @@
 	</dependencies>
 
 	<build>
-		<!-- plugins>
+		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins-->
+		</plugins>
 	</build>
 
 
