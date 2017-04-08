@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TubehappyFinalApplication {
+public class TubeHappyFinalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TubehappyFinalApplication.class, args);
+		SpringApplication.run(TubeHappyFinalApplication.class, args);
 	}
 }
