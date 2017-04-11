@@ -11,17 +11,23 @@ import java.util.Properties;
 /** Responsible for formatting URL queries for API calls, and converting XML to JSON. */
 public class Formatter {
 
-    // constructor
-  public Formatter(){};
+    private int uclassify_FileCount;
+    private String api_key;
+
+    public Formatter() {
+        this.uclassify_FileCount = 1;
+        this.api_key = "tGv51rglTt5D";
+    }
 
 
-  public void convertXMLtoJSON() {};
+    public void convertXMLtoJSON() {
+  };
 
-  public void uclassify_Formatter() throws FileNotFoundException {
-      String textContent = "I am happy sad bad";
+  public File uclassify_Formatter(String textContent) throws FileNotFoundException {
       int textCount = 1;
       int classifyCount = 1;
       String api_key = "tGv51rglTt5D";
+      String fileName = "/uClassify_file" + uclassify_FileCount + "xml";
 
       XMLBuilder2 builder = XMLBuilder2.create("uclassify")
               .attribute("version", "1.01")
@@ -42,9 +48,11 @@ public class Formatter {
       outputProperties.put(javax.xml.transform.OutputKeys.METHOD, "xml");
       // Pretty-print the XML output (doesn't work in all cases)
       outputProperties.put(javax.xml.transform.OutputKeys.INDENT, "yes");
-      File file = new File("/uClassify_file.xml");
+      File file = new File(fileName);
       PrintWriter writer = new PrintWriter(new FileOutputStream("projects.xml"));
       builder.toWriter(writer, outputProperties);
+
+      return file;
   };
 
   void textgain_Formatter() {};
