@@ -6,8 +6,7 @@ package com.cs313.cameron.model;
  */
 public class Formatter {
 
-    public Formatter() {
-    }
+    public Formatter(){};
 
     void convertXML(){};
 
