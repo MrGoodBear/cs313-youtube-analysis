@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<uclassify xmlns="http://api.uclassify.com/1/RequestSchema" version="1.01">
+<texts>
+<text id="text_1">I am happy sad bad</text>
+</texts>
+<readCalls readApiKey="tGv51rglTt5D">
+<classify classifierName="Sentiment" id="call_1" textID="text_1" username="uClassify"/>
+</readCalls>
+</uclassify>
