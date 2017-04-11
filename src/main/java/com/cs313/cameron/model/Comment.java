@@ -6,4 +6,16 @@ package com.cs313.cameron.model;
  */
 public class Comment {
     int sentimentCalculation;
+
+    public Comment(int sentimentCalculation) {
+        this.sentimentCalculation = sentimentCalculation;
+    }
+
+    public int getSentimentCalculation() {
+        return sentimentCalculation;
+    }
+
+    public void setSentimentCalculation(int sentimentCalculation) {
+        this.sentimentCalculation = sentimentCalculation;
+    }
 }
