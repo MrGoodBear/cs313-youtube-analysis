@@ -1,0 +1,98 @@
+/* For the custom logo font */
+@font-face
+{
+    font-family: CrazyBlockFont;
+    src: url('kulminoituva.ttf'),
+    url('kulminoituva.ttf');
+}
+#welcome_div {
+    text-align: center;
+    /*background: rgba(204, 204, 204, 0.7);*/
+    padding: 18px;
+    position: absolute;
+    display: inline-block;
+}
+
+#welcome_logo{
+    max-width: 80%;
+    display: block;
+    margin-right: 22%;
+    margin-left: 22%;
+}
+body, html {
+    height: 100%;
+    margin: 0;
+    font: 400 15px/1.8 "Lato", sans-serif;
+    color: #777;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bgimg-1 {
+    background-image: url("images/sun_park_city.jpg");
+    min-height: 100%;
+}
+
+.bgimg-2 {
+    background-image: url("images/girls_on_truck.jpeg");
+    min-height: 400px;
+    opacity: 0.65;
+}
+
+.bgimg-3 {
+    background-image: url("images/jumping_pool.jpg");
+    min-height: 400px;
+    opacity: 0.65;
+}
+.bgimg-4 {
+    background-image: url("images/girl_grayscale.jpeg");
+    min-height: 400px;
+    width: 100%;
+    margin: auto;
+    display: inline-block;
+    opacity: 0.65;
+}
+
+.caption {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #000;
+}
+
+.border {
+    background-color:transparent;
+    font-size:25px;
+    color: #f7f7f7;
+    padding: 18px;
+    letter-spacing: 10px;
+}
+
+h3 {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font: 20px "Lato", sans-serif;
+    color: #111;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+
+.content{
+    color:#ddd;
+    background-color:#282E34;
+    padding:50px 80px;
+    text-align: justify;
+}
