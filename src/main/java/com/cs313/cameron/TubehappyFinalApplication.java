@@ -1,6 +1,7 @@
 package com.cs313.cameron;
 
 import com.cs313.cameron.model.Formatter;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,7 +20,7 @@ public class TubeHappyFinalApplication {
 
     }
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, UnirestException {
 		SpringApplication.run(TubeHappyFinalApplication.class, args);
         Formatter formatter = new Formatter();
         List<String> text = Arrays.asList("i like turtles", "baby girl, I like your moves", "hey big boy");
