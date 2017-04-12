@@ -1,7 +1,5 @@
 package com.cs313.cameron.model;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.services.youtube.YouTube;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mashape.unirest.http.HttpResponse;
@@ -9,7 +7,10 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,11 +55,11 @@ public class Formatter {
 
     ArrayList<Comment> commentList = new ArrayList<>();
 
-      GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream(google_credential));
+      /*GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream(google_credential));
 
      YouTube youtube = new YouTube.Builder(Auth.HTTP_TRANSPORT, Auth.JSON_FACTORY, credential)
               .setApplicationName("TubeHappy").build();
-
+*/
     int hi = 0;
   }
 
