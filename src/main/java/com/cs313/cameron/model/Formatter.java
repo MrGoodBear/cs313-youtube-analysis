@@ -1,18 +1,19 @@
 package com.cs313.cameron.model;
 
-import com.jamesmurty.utils.XMLBuilder2;
+import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Properties;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 /** Responsible for formatting URL queries for API calls, and converting XML to JSON. */
 public class Formatter {
 
-
+    private static final Logger log = LoggerFactory.getLogger(Formatter.class);
     private int uclassify_FileCount;;
     private String api_key;
     public Formatter() {
@@ -24,44 +25,36 @@ public class Formatter {
 public void convertXMLtoJSON() {
   }
 
-  public File uclassify_Formatter(List<String> textContent, int commentCount) throws FileNotFoundException {
+  public void uclassify_Formatter() throws IOException {
       String api_key = "tGv51rglTt5D";
-      String fileName = "uClassify_file" + uclassify_FileCount + ".xml";
+      Gson gson = new Gson();
 
-          XMLBuilder2 builder = XMLBuilder2.create("uclassify")
-                  .attribute("version", "1.01")
-                  .attribute("xmlns", "http://api.uclassify.com/1/RequestSchema")
-                  .element("texts");
-      for (int i = 0; i < commentCount; i++) {
-          builder.xpathFind("//texts").element("text").attribute("id", "text_" + i).text(textContent.get(i));
-          //maybe a foreach?
-          // add new texts to batch right here
+        // sentiment results will be stored into this
+      ArrayList<Sentiment> sentimentArrayList = new ArrayList<>();
+
+      Comment content = new Comment();
+      String json = gson.toJson(content);
+
+      RestTemplate restTemplate = new RestTemplate();
+      Sentiment sentiment = new Sentiment();
+      restTemplate.postForObject("https://api.uclassify.com/v1/", sentiment, Sentiment.class);
+      log.info(sentiment.toString());
+
+      URL uclassify_url = new URL("https://api.uclassify.com/v1/uclassify/sentiment/classify");
+      HttpURLConnection conn = (HttpURLConnection) uclassify_url.openConnection();
+      conn.setDoOutput(true);
+      conn.setUseCaches(false);
+      conn.setInstanceFollowRedirects(false);
+      conn.setRequestMethod("POST");
+      conn.setRequestProperty("Content-Type", "application/json");
+      conn.setRequestProperty("Authorization", "Token YOUR_READ_API_KEY_HERE");
+      DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+      //wr.write(json);
+      Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+      for (int c = in.read(); c != -1; c = in.read()) {
+          System.out.print((char) c);
       }
-      builder.xpathFind("//texts").up().up()
-        .element("readCalls").attribute("readApiKey", api_key);
-
-      for (int i = 0; i < commentCount; i++) {
-          builder.xpathFind("//readCalls")
-                  .element("classify").attribute("id", "call_" + i).attribute("username", "uClassify")
-                  .attribute("classifierName", "Sentiment").attribute("textId", "text_" + i);
-      }
-      builder.xpathFind("//readCalls").up().up();
-
-      // create new file to store calls
-      File file = new File(fileName);
-      Properties outputProperties = new Properties();
-
-      // Explicitly identify the output as an XML document
-      outputProperties.put(javax.xml.transform.OutputKeys.METHOD, "xml");
-      // Pretty-print the XML output (doesn't work in all cases)
-      outputProperties.put(javax.xml.transform.OutputKeys.INDENT, "yes");
-
-      PrintWriter writer = new PrintWriter(new FileOutputStream(fileName));
-      builder.toWriter(writer, outputProperties);
-
-      uclassify_FileCount++;
-      return file;
-  };
+  }
 
   void textgain_Formatter() {};
 
