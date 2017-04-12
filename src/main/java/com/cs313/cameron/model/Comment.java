@@ -19,6 +19,7 @@ public class Comment {
     ArrayList<String> uclassify_texts;
 
     public Comment() {
+        //todo: youtube comments need to be deposited here
         ArrayList<String> comments = new ArrayList<>(Arrays.asList("hey there baby girl", "hey there big boy", "i like" +
                 " turtles"));
         uclassify_texts = comments;

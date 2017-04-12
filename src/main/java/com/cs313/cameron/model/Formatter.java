@@ -27,10 +27,6 @@ public class Formatter {
         this.api_key = "tGv51rglTt5D";
     }
 
-
-public void convertXMLtoJSON() {
-  }
-
   public void uclassify_Formatter() throws IOException, UnirestException {
       String api_key = "tGv51rglTt5D";
       Gson gson = new Gson();
@@ -49,12 +45,8 @@ public void convertXMLtoJSON() {
               .body(content_json)
               .asJson();
       InputStream rawJSON = jsonResponse.getRawBody();
-
       Reader reader = new InputStreamReader(rawJSON, "UTF-8");
-      //Sentiment sentiment_result = gson.fromJson(reader, Sentiment.class);
-
       sentimentArrayList = gson.fromJson(reader, new TypeToken<List<Sentiment>>(){}.getType());
-      int hi = 0;
   }
 
   void textgain_Formatter() {
