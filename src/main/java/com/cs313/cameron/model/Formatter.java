@@ -1,6 +1,7 @@
 package com.cs313.cameron.model;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -9,7 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
+import java.util.List;
 
 /** Responsible for formatting URL queries for API calls, and converting XML to JSON. */
 public class Formatter {
@@ -34,18 +39,27 @@ public void convertXMLtoJSON() {
       ArrayList<Sentiment> sentimentArrayList = new ArrayList<>();
 
       Comment content = new Comment();
-      String json = gson.toJson(content);
+      String content_json = gson.toJson(content);
 
       HttpResponse<JsonNode> jsonResponse = Unirest.post("https://api.uclassify.com/v1/{username}/{classifierName}/classify")
               .routeParam("username", "uClassify")
               .routeParam("classifierName", "Sentiment")
               .header("Content-Type", "application/json")
               .header("Authorization", "Token " + api_key)
-              .body(json)
+              .body(content_json)
               .asJson();
+      InputStream rawJSON = jsonResponse.getRawBody();
+
+      Reader reader = new InputStreamReader(rawJSON, "UTF-8");
+      //Sentiment sentiment_result = gson.fromJson(reader, Sentiment.class);
+
+      sentimentArrayList = gson.fromJson(reader, new TypeToken<List<Sentiment>>(){}.getType());
+      int hi = 0;
   }
 
-  void textgain_Formatter() {};
+  void textgain_Formatter() {
+
+  };
 
   void monkeylearn_Formatter() {};
 };
