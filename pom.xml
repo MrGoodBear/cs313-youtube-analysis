@@ -65,6 +65,21 @@
             <artifactId>google-api-services-youtube</artifactId>
             <version>v3-rev183-1.22.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-sqladmin</artifactId>
+            <version>v1beta4-rev39-1.22.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-compute</artifactId>
+            <version>v1-rev142-1.22.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.stratos</groupId>
+            <artifactId>google-compute-engine</artifactId>
+            <version>1.9.1</version>
+        </dependency>
 
 	</dependencies>
 

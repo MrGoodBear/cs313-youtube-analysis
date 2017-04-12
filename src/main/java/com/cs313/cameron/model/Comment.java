@@ -1,8 +1,5 @@
 package com.cs313.cameron.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -13,16 +10,16 @@ import java.util.Arrays;
 public class Comment {
     transient int sentimentCalculation;
 
-    transient ArrayList<String> comments;
-    @SerializedName("texts")
-    @Expose
-    ArrayList<String> uclassify_texts;
+    String comment;
+
+
+
+
 
     public Comment() {
         //todo: youtube comments need to be deposited here
         ArrayList<String> comments = new ArrayList<>(Arrays.asList("hey there baby girl", "hey there big boy", "i like" +
                 " turtles"));
-        uclassify_texts = comments;
     }
 
     public int getSentimentCalculation() {
