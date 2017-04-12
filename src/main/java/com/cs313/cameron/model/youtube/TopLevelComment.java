@@ -1,9 +1,9 @@
-package com.cs313.cameron.model.youtube_sample;
+package com.cs313.cameron.model.youtube;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Item {
+public class TopLevelComment {
 
     @SerializedName("kind")
     @Expose
@@ -16,6 +16,6 @@ public class Item {
     public String id;
     @SerializedName("snippet")
     @Expose
-    public Snippet snippet;
+    public Snippet_ snippet;
 
 }

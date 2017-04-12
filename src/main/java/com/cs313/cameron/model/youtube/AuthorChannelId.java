@@ -1,4 +1,4 @@
-package com.cs313.cameron.model.youtube_sample;
+package com.cs313.cameron.model.youtube;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

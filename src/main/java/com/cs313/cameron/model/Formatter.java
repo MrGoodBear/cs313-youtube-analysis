@@ -1,6 +1,6 @@
 package com.cs313.cameron.model;
 
-import com.cs313.cameron.model.youtube_sample.RetrievedComments;
+import com.cs313.cameron.model.youtube.RetrievedComments;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -51,8 +51,6 @@ public class Formatter {
       System.out.println(rawJSON);
       Reader reader = new InputStreamReader(rawJSON, "UTF-8");
       sentimentArrayList = gson.fromJson(reader, new TypeToken<List<Sentiment>>(){}.getType());
-
-
   }
 
   public void youtube_Formatter() throws UnirestException, IOException {
