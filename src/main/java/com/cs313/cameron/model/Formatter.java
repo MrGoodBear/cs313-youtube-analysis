@@ -1,10 +1,12 @@
 package com.cs313.cameron.model;
 
-import com.cs313.cameron.model.youtube_sample.Example;
+import com.cs313.cameron.model.youtube_sample.RetrievedComments;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -12,8 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,16 +28,16 @@ public class Formatter {
         this.uclassify_key = System.getenv("UCLASSIFY_KEY");
         this.google_credential = System.getenv("GOOGLE_CREDENTIAL");
         this.google_key = System.getenv("GOOGLE_KEY");
-        this.video_id = "wtLJPvx7-ys";
+        this.video_id = "ZTUVgYoeN_b";
     }
 
   public void uclassify_Formatter() throws IOException, UnirestException {
       Gson gson = new Gson();
-//todo: send comments in here
+
         // sentiment results will be stored into this
       ArrayList<Sentiment> sentimentArrayList = new ArrayList<>();
 
-      Comment content = new Comment(); //todo: this may need to be changed to uClassify type
+      Comment content = new Comment();
       String content_json = gson.toJson(content);
 
       HttpResponse<JsonNode> jsonResponse = Unirest.post("https://api.uclassify.com/v1/{username}/{classifierName}/classify")
@@ -57,44 +57,35 @@ public class Formatter {
 
   public void youtube_Formatter() throws UnirestException, IOException {
 
-    ArrayList<Comment> commentList = new ArrayList<>();
+      Unirest.setObjectMapper(new ObjectMapper() {
+          private com.fasterxml.jackson.databind.ObjectMapper jacksonObjectMapper
+                  = new com.fasterxml.jackson.databind.ObjectMapper();
 
+          public <T> T readValue(String value, Class<T> valueType) {
+              try {
+                  return jacksonObjectMapper.readValue(value, valueType);
+              } catch (IOException e) {
+                  throw new RuntimeException(e);
+              }
+          }
 
-      URL url = new URL("https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&key=AIzaSyCP4coHWLH45HO57P0byRDeIlqPcECZ31w&videoId=tLTm_POao1c");
-      URLConnection conn = url.openConnection();
-      InputStream rawJSON = conn.getInputStream();
+          public String writeValue(Object value) {
+              try {
+                  return jacksonObjectMapper.writeValueAsString(value);
+              } catch (JsonProcessingException e) {
+                  throw new RuntimeException(e);
+              }
+          }
+      });
 
-      Gson gson = new Gson();
-      Reader reader = new InputStreamReader(rawJSON, "UTF-8");
-      ArrayList<Example> hopeitworks = new ArrayList<>();
-     // hopeitworks = gson.fromJson(reader, new TypeToken<List<Example>>(){}.getType());
-      System.out.println("hello");
-      System.out.println(rawJSON);
-    int omg = 0;
-
-// Do what you want with that stream
-
-     /* HttpResponse<JsonNode> response = Unirest.get("https://www.googleapis" +
+      HttpResponse<RetrievedComments> jsonResponse = Unirest.get("https://www.googleapis" +
               ".com/youtube/v3/commentThreads?part=snippet&key=AIzaSyCP4coHWLH45HO57P0byRDeIlqPcECZ31w&videoId=tLTm_POao1c")
-      .asJson();
-      InputStream rawJSON = response.getRawBody();
-      int omg2 = 0;
-      //Body body = response.getBody();
-//      String filbert = body.toString();
+              .asObject(RetrievedComments.class);
 
-        //JsonNode bear = response.getBody();
+      RetrievedComments comments = jsonResponse.getBody();
 
-      // Call the YouTube Data API's commentThreads.list method to
-      // retrieve video comment threads.
-      /*CommentThreadListResponse videoCommentsListResponse = youtube.commentThreads()
-              .list("snippet").setVideoId("wtLJPvx7-ys").setTextFormat("plainText").execute();
-      List<CommentThread> videoComments = videoCommentsListResponse.getItems();*/
 
-      /*CommentThreadListResponse videoCommentsListResponse = youtube.commentThreads()
-              .list("snippet").setVideoId(video_id).setTextFormat("plainText").execute();
-      List<CommentThread> videoComments = videoCommentsListResponse.getItems();
-*/
-      int hey = 0;
+    int hi = 0;
   }
 
   void textgain_Formatter() {
